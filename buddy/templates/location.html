@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Location</title>
+    <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+    <style>
+        .mastercontainer {
+            margin: 0px auto;
+            outline: 1px dotted red;
+            width: 375pt;
+            height: 812pt;
+        }
+
+        .map {
+            height: 450pt;
+            background-color: green;
+        }
+
+        .map h2 {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            padding-top: 50pt;
+        }
+
+        .directions {
+            height: 200pt;
+            width: 100%;
+            padding-top: 20pt;
+            color: #9A9A00; 
+        }
+
+        .dropdown-toggle{
+            margin-top: 40pt;
+            margin-left: 60pt;
+        }
+        .btn-next{
+            margin-left: 250pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mastercontainer">
+        <div class="map">
+            <p>(Google Maps API here)</p>
+            <h2>LOCATION</h2>
+
+        </div>
+        <div class="directions">
+            <ul>
+                <li>555 Starting Location Drive, CA 55555</li>
+                <li></li>
+                <li></li>
+                <li>To 123 Final Destination Lane, CA 55555</li>
+            </ul>
+            <img src='/' alt="gold_arrow">
+            <div class="dropdown">
+                <button class="btn btn-outline-primary col-8 dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Depart at 9:00am
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn btn-outline-info btn-next">Next Page</a>
+    </div>
+    </div>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+
+</html>

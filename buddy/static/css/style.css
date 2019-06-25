@@ -1,1 +1,146 @@
-. 
+/* Custom Stylesheet */
+
+.container-fluid{
+  margin: 0px auto;
+  outline: 1px dotted red;
+  width: 375pt;
+  display: grid;
+  columns: 19px;
+  offset: 52px;
+}
+/* ------INDEX/SPLASH page --------  */
+img{
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+.white-text-container form{
+  width: 250pt;
+  margin-left: 50pt;
+  padding: 10pt;
+}
+.facebookicon{
+  width: 200pt;
+  margin-left: 80pt;
+}
+.googleicon{
+  width: 200pt;
+  margin-left: 80pt;
+  margin-top: 20pt;
+}
+.waves-light{
+  margin-left: 90pt;
+  margin-top: 30pt;
+}
+.white-text-container .btn-large{
+  margin-left: 135pt;
+  margin-top: 10pt;
+}
+.white-text-container .btn{
+  margin-left: 85pt;
+  margin-top: 20pt;
+}
+
+/* ----SIGN UP --------- */
+
+.mastercontainer{
+  width: 375pt;
+}
+.row-wrap{
+  width: 300pt;
+  height: 20pt;
+}
+.header{
+  width: 350pt;
+  height: 28pt;
+  font-family: 14pt;
+  text-align: center;
+  margin-top: 15pt;
+  color: #008080;
+  display: inline-block;
+}
+.row img{
+  float: left;
+  width: 15pt;
+  display: inline-block;
+  margin-left: 30pt;
+  margin-top: 8pt;
+}
+.header h4{
+  display: inline-block;
+  margin-left: -20pt;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 4pt;
+}
+.mastercontainer input{
+  width: 80pt;
+}
+.signupform{
+  width: 225pt;
+  margin-left: 65pt;
+  margin-top: 30pt;
+}
+.signupform input{
+  background-color: #008080;
+  width: 180pt;
+  margin-left: 20pt;
+  margin-top: 80pt;
+}
+.signupform h6{
+  color:#008080;
+  margin-top: 50pt;
+  margin-left: 5pt;
+}
+
+/* ----SIGN UP --------- */
+.userimage{
+  width: 375pt;
+  height: 200pt;
+  background-color: #a7a7a7;
+  opacity: 50%;
+}
+.userbio{
+  margin: 0px;
+  width: 345pt;
+  height: 200pt;
+  background-color: rosybrown;
+  margin-left: 15pt;
+}
+.lasttripinfo{
+  margin-top: 15pt;
+  margin-left: 15pt;
+  width: 345pt;
+  height: 200pt;
+  position: relative;
+  background-color:rgba(0, 154, 154, 0.45);
+}
+.lasttripinfo-gradient{
+  width: 345pt;
+  height: 100pt;
+  margin-left: 15pt;
+  font-family: helvetica;
+  font-weight: lighter;
+  background-color: rgba(0, 154, 154, 0.29);
+}
+.lasttripinfo h4{
+  color: white;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 6;
+  margin-left: 25pt;
+}
+.lasttripinfo h5{
+  color: white;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  margin-left: 25pt;
+  width: 250pt;
+}
+.lasttripinfo h6{
+  color: white;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  margin-left: 25pt;
+  width: 250pt;
+}
