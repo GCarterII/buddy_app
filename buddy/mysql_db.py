@@ -2,6 +2,7 @@ import pymysql.cursors
 class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(host = 'localhost',
+                                    port = 8889,
                                     user = 'root', # change the user and password as needed
                                     password = 'root', 
                                     db = db,

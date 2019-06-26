@@ -12,6 +12,19 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Local CSS -->
     <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- Files I took from my Login & Regis since the jinja wasn't working -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
 
 
 </head>
@@ -24,16 +37,25 @@
                 <img src='/static/img/buddysplash.jpg' class='img-fluid' alt='two people walking in the park'>
             </div>
         </div>
-        <div class='white-text-container'>
-            <form>
-                <input class="form-control form-control-sm" type="text" placeholder="email">
-                <input class="form-control form-control-sm" type="text" placeholder="password">
-                <a class="waves-effect waves-light btn" href='/signinprocess'>Submit</a>
-            </form>
-            <a class="waves-effect waves-light btn-large" href='/signup'>Sign Up</a>
-            <img src='/static/img/google signin.png' alt='google oauth icon' class='googleicon'>
-            <img src='/static/img/facebook.png' alt='facebook oauth icon' class='facebookicon'>
-        </div>
+        <form action='/signin' method='POST'>
+            {% with messages = get_flashed_messages(category_filter=['member']) %}
+            {% if messages %}
+            {% for message in messages %}
+            <p class="text-danger">{{message}}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <div class='white-text-container'>
+
+                <input class="form-control form-control-sm" type="text" name="email" placeholder="email">
+                <input class="form-control form-control-sm" type="text" name="password" placeholder="password">
+                <input type="submit" class="waves-effect waves-light btn-large" value="Log in">
+                <a href='/signup' class="waves-effect btn-warning btn-large">Sign up</a>
+                <img src='/static/img/google signin.png' alt='google oauth icon' class='googleicon'>
+                <img src='/static/img/facebook.png' alt='facebook oauth icon' class='facebookicon'>
+            </div>
+        </form>
     </div>
 
 
