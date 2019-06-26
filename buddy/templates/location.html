@@ -16,7 +16,7 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
     <style>
-        .mastercontainer {
+        .container-fluid {
             margin: 0px auto;
             outline: 1px dotted red;
             width: 375pt;
@@ -38,54 +38,81 @@
             height: 200pt;
             width: 100%;
             padding-top: 20pt;
-            color: #9A9A00; 
+            color: #9A9A00;
         }
 
-        .dropdown-toggle{
+        .dropdown-toggle {
             margin-top: 40pt;
             margin-left: 60pt;
         }
-        .btn-next{
+
+        .btn-next {
             margin-left: 250pt;
         }
     </style>
 </head>
 
 <body>
-    <div class="mastercontainer">
-        <div class="map">
-            <p>(Google Maps API here)</p>
-            <h2>LOCATION</h2>
+    <div class="container-fluid">
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class="map">
+                    <p>(Google Maps API here)</p>
+                    <h2>LOCATION</h2>
 
-        </div>
-        <div class="directions">
-            <ul>
-                <li>555 Starting Location Drive, CA 55555</li>
-                <li></li>
-                <li></li>
-                <li>To 123 Final Destination Lane, CA 55555</li>
-            </ul>
-            <img src='/' alt="gold_arrow">
-            <div class="dropdown">
-                <button class="btn btn-outline-primary col-8 dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Depart at 9:00am
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
                 </div>
+                <div class="directions">
+                    <ul>
+                        <li>555 Starting Location Drive, CA 55555</li>
+                        <li></li>
+                        <li></li>
+                        <li>To 123 Final Destination Lane, CA 55555</li>
+                    </ul>
+                    <img src='/' alt="gold_arrow">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary col-8 dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Depart at 9:00am
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-outline-info btn-next">Next Page</a>
             </div>
         </div>
-        <a href="#" class="btn btn-outline-info btn-next">Next Page</a>
-    </div>
-    </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+    <!-- Required scripts for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+    <!-- Sidenav Scrip -->
+    <script src="assets/sidenav.js"></script>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
 
 </html>
