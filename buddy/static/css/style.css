@@ -97,7 +97,7 @@ img{
 .userimage{
   width: 375pt;
   height: 200pt;
-  background-color: #a7a7a7;
+  background-color: white;
   opacity: 50%;
 }
 .userbio{
@@ -148,8 +148,32 @@ img{
 /* ---- USER PROFILE --------- */
 .col-sm-12 h4{
   text-align: center;
+  margin-top: 5px;
   color: #009A9A;
 }
-.jumbotron h1 h3{
-  text-align: right;
+.userimage h3{
+  text-align: center;
+  margin-top: 5px;
+  color: #009A9A;
+}
+.userimage h5{
+  text-align: center;
+  color: #009A9A;
+}
+.img{
+  height: 80px;
+  width: 60px;
+  background-color: #009A9A;
+  border: 2px solid black;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: 45%;
+}
+.userimage p{
+  margin-top: 20px;
+  text-align: center;
+  color: #009A9A;
+}
+.btn-outline-primary{
+margin-left: 200px;
 }
