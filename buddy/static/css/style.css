@@ -1,5 +1,6 @@
 /* Custom Stylesheet */
 
+
 .container-fluid{
   margin: 0px auto;
   outline: 1px dotted red;
@@ -33,14 +34,20 @@ img{
   margin-top: 30pt;
 }
 .white-text-container .btn-large{
-  margin-left: 135pt;
-  margin-top: 10pt;
+  margin-left: 137.5pt;
+  margin-top: 15pt;
 }
-.white-text-container .btn{
-  margin-left: 85pt;
+.white-text-container .btn-warning{
+  margin-left: 135pt;
   margin-top: 20pt;
 }
-
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: 30px;
+}
 /* ----SIGN UP --------- */
 
 .mastercontainer{
@@ -77,23 +84,47 @@ img{
   width: 80pt;
 }
 .signupform{
-  width: 225pt;
-  margin-left: 65pt;
+  width: 300pt;
+  margin-left: 35pt;
   margin-top: 30pt;
 }
-.signupform input{
+.signup-header-row img{
+  text-align: left;
+}
+.signup-header-row h4{
+  text-align: center;
+  margin-left: 125pt;
+}
+/* .signupform input{
   background-color: #008080;
   width: 180pt;
   margin-left: 20pt;
   margin-top: 80pt;
-}
-.signupform h6{
+} */
+/* .signupform h6{
   color:#008080;
   margin-top: 50pt;
   margin-left: 5pt;
+} */
+
+.arrow-img{
+  width: 30pt;
+  display: inline-block;
+}
+.col-sm-12 h4{
+  text-align: center;
+  color: #009A9A;
+  display: inline-block;
 }
 
-/* ----SIGN UP --------- */
+/* ---- USER PROFILE --------- */
+.col-sm-12 h4{
+  text-align: center;
+  color: #009A9A;
+}
+.jumbotron h1 h3{
+  text-align: right;
+}
 .userimage{
   width: 375pt;
   height: 200pt;
@@ -107,6 +138,9 @@ img{
   background-color: rosybrown;
   margin-left: 15pt;
 }
+
+/* ---- LOCATION --------- */
+
 .lasttripinfo{
   margin-top: 15pt;
   margin-left: 15pt;
@@ -143,13 +177,4 @@ img{
   font-weight: 500;
   margin-left: 25pt;
   width: 250pt;
-}
-
-/* ---- USER PROFILE --------- */
-.col-sm-12 h4{
-  text-align: center;
-  color: #009A9A;
-}
-.jumbotron h1 h3{
-  text-align: right;
 }
