@@ -83,6 +83,19 @@
                     <input type="text" class="form-control" id="exampleInputPronoun1" name="pronoun" placeholder="">
                 </div>
 
+                {% with messages = get_flashed_messages(category_filter=['about']) %}
+                {% if messages %}
+                {% for message in messages %}
+                <p class="text-danger">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <div class="form-group">
+                    <label for="exampleInputPronoun1">About</label>
+                    <input type="text" class="form-control" id="exampleInputPronoun1" name="about" placeholder="">
+                </div>
+
                 {% with messages = get_flashed_messages(category_filter=['email']) %}
                 {% if messages %}
                 {% for message in messages %}
@@ -127,7 +140,7 @@
                         placeholder="">
                 </div>
 
-                <h6>By creating an account you agree to our Terms of Service and Privacy Policy</h6>
+                <p>By creating an account you agree to our Terms of Service and Privacy Policy</p>
 
 
                 <input type="submit" class="btn btn-primary" value='submit'>
