@@ -90,6 +90,10 @@ def signup():
 @app.route('/signin', methods=['POST'])
 def member():
 
+    if 'userid' not in session:
+        flash('You are not logged in', 'member')
+        return redirect('/')
+
     mysql = connectToMySQL('buddy')
     query = "SELECT password, id FROM users WHERE email = %(email)s;"
     data = {
@@ -119,6 +123,10 @@ def signin_process():
 @app.route('/welcome')
 def buddy_Welcome():
 
+    if 'userid' not in session:
+        flash('You are not logged in', 'member')
+        return redirect('/')
+
     userid = session['userid']
     mysql = connectToMySQL('buddy')
     query = "SELECT first_name FROM users WHERE id=" +str(userid)
@@ -135,9 +143,54 @@ def buddy_Welcome():
     return render_template('userprofile.html', first_name=first_name, last_name=last_name, about=about)
 
 
-@app.route('/request')
+@app.route('/available')
 def accepted():
-    return render_template('accepted.html')
+
+    if 'userid' not in session:
+        flash('You are not logged in', 'member')
+        return redirect('/')
+
+    # return render_template('accepted.html')
+    userid = session['userid']
+    mysql = connectToMySQL('buddy')
+    query = "SELECT first_name FROM users WHERE id=" +str(userid)
+    first_name = mysql.query_db(query)
+
+    mysql = connectToMySQL('buddy')
+    query = "SELECT about FROM users WHERE id=" +str(userid)
+    about = mysql.query_db(query)
+
+    return render_template('accepted.html', first_name=first_name, about=about)
+
+
+@app.route('/review', methods=['POST'])
+def review():
+
+    if 'userid' not in session:
+        flash('You are not logged in', 'member')
+        return redirect('/')
+
+    userid = session['userid']
+    mysql = connectToMySQL('buddy')
+    query = "INSERT INTO reviews (message, reviewer_id, updated_at, created_at) VALUES (%(message)s, %(reviewer_id)s, NOW(), NOW());"
+    data = {
+        'message': request.form['message'],
+        'reviewer_id': userid
+    }
+    mysql.query_db(query, data)
+    flash("Thank you for your review!", 'review')
+    return redirect('/welcome')
+
+
+
+@app.route('/location')
+def location():
+    
+    if 'userid' not in session:
+        flash('You are not logged in', 'member')
+        return redirect('/')
+    return render_template('location.html')
+
 
 
 if __name__ == "__main__":

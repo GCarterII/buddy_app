@@ -138,12 +138,20 @@ img{
   background-color: rosybrown;
   margin-left: 15pt;
 }
-
+.negative h6{
+  color: red;
+}
+.neutral h6{
+  color: yellow;
+}
+.positive h6{
+  color: green;
+}
 /* ---- LOCATION --------- */
 
 .lasttripinfo{
   margin-top: 15pt;
-  margin-left: 15pt;
+  margin-left: 25pt;
   width: 345pt;
   height: 200pt;
   position: relative;
@@ -152,7 +160,7 @@ img{
 .lasttripinfo-gradient{
   width: 345pt;
   height: 100pt;
-  margin-left: 15pt;
+  margin-left: 25pt;
   font-family: helvetica;
   font-weight: lighter;
   background-color: rgba(0, 154, 154, 0.29);
@@ -205,19 +213,25 @@ img{
 .userimage h5{
   color: #009A9A;
 }
-.img{
-  height: 80pt;
-  width: 60pt;
+.profile_pic{
+  max-height: 70pt;
+  width: auto;
   background-color: #009A9A;
   border: 2pt solid black;
   text-align: center;
   margin-top: 5pt;
   margin-left: 45%;
-}
+} */
 .userimage p{
   margin-top: 20pt;
   text-align: center;
   color: #009A9A;
+}
+.review_logo{
+  height: 100pt;
+  width: auto;
+  display: inline-block;
+  margin-left: 17pt;
 }
 /* ---- Request Page --------- */
 .img col-6{
@@ -226,3 +240,4 @@ img{
   background-color: blue;
   border: 2px solid black;
 }
+

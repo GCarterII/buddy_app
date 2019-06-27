@@ -124,41 +124,60 @@
     <div class="container-fluid">
         <div class='row'>
             <div class='col-sm-12'>
-
-                <div class="jumbotron">
-                    <div class="img col-6">
-
+                <div class="pos-f-t">
+                    <div class="collapse" id="navbarToggleExternalContent">
+                        <div class="bg-dark p-4">
+                            <button class="btn-request btn-large">Request Walk</button>
+                            <a href='/available' class="btn-available btn-large">Available to Walk</a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="banner">
-                    <div class="box1">
-                        <h5>First Last Name</h5>
-                        <p>City, State</p>
-                    </div>
-                    <div class="box2">
-                        <a href="#" class="btn btn-outline-primary">Message</a>
-                    </div>
-                </div>
-                <div class="maincontent">
-                    <p>Hi! My name is _______. This is a short bio about who I am and why you can be comfortable walking
-                        with me.</p>
-
-                    <div class="map">
-                        <p>(Google Maps API goes here)</p>
-
-                    </div>
-                    <div class="directions">
-                        <p>To ___(location jinja)___</p>
-                        <p>____mi via _(current st address jinja)_</p>
-                        <p>Arrival time: _(jinja)_ </p>
-
-                        <img src="#" alt="gold_arrow">
-                    </div>
-                    <a href="#" class="btn btn-outline-info btn-next">Next Page</a>
+                    <nav class="navbar navbar-light background-color: white">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a href='/' class='btn btn-outline-danger col-3' value="log out">log out</a>
+                    </nav>
                 </div>
             </div>
         </div>
+
+            <div class="jumbotron">
+                <div class="profile-pic">
+                        <img class="review_logo" src="{{ url_for('static', filename='img/devon.jpg') }}" alt="devon_test_pic">
+                </div>
+            </div>
+
+            <div class="banner">
+                <div class="box1">
+                    <h5>{{ first_name[0]['first_name'] }}</h5>
+                    <p>API that enters city when you enter zip in request form?</p>
+                </div>
+                <div class="box2">
+                    <a href="#" class="btn btn-outline-primary">Message</a>
+                </div>
+            </div>
+            <div class="maincontent">
+                <p>Hi! My name is {{ first_name[0]['first_name'] }}. This is a short bio about who I am and why you can
+                    be comfortable walking
+                    with me: {{ about[0]['about'] }}</p>
+
+                <div class="map">
+                    <p>(Google Maps API goes here)</p>
+
+                </div>
+                <div class="directions">
+                    <p>To ___(location jinja)___</p>
+                    <p>____mi via _(current st address jinja)_</p>
+                    <p>Arrival time: _(jinja)_ </p>
+
+                    <img src="#" alt="gold_arrow">
+                </div>
+                <a href="/location" class="btn btn-outline-info btn-next">Next Page</a>
+            </div>
+        </div>
+    </div>
     </div>
 
 

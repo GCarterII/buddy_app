@@ -56,6 +56,22 @@
     <div class="container-fluid">
         <div class='row'>
             <div class='col-sm-12'>
+                <div class="pos-f-t">
+                    <div class="collapse" id="navbarToggleExternalContent">
+                        <div class="bg-dark p-4">
+                            <a href='/welcome' class="btn-request btn-large">Account Profile</a>
+                            <a href='/available' class="btn-available btn-large">Available to Walk</a>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-light background-color: white">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a href='/' class='btn btn-outline-danger col-3' value="log out">log out</a>
+                    </nav>
+                </div>
                 <div class="map">
                     <p>(Google Maps API here)</p>
                     <h2>LOCATION</h2>
@@ -75,13 +91,12 @@
                             Depart at 9:00am
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Depart now</a>
+                            <a class="dropdown-item" href="#">Depart at a later time</a>
+                            <a class="dropdown-item" href="#">Arrive at a later time</a>
                         </div>
                     </div>
                 </div>
-                <a href="#" class="btn btn-outline-info btn-next">Next Page</a>
             </div>
         </div>
     </div>

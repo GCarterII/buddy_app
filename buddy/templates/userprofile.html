@@ -12,7 +12,16 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Local CSS -->
     <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
-
+    <!-- This is a test for the hide/show feature in jquery -->
+    <style>
+        span {
+            background: #def3ca;
+            padding: 3px;
+            float: left;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
 
 </head>
 <title>Buddy App</title>
@@ -24,8 +33,8 @@
                 <div class="pos-f-t">
                     <div class="collapse" id="navbarToggleExternalContent">
                         <div class="bg-dark p-4">
-                                <a href='/request' class="btn-request btn-large">Request Walk</a>
-                                <a href='#' class="btn-available btn-large">Available to Walk</a>
+                            <button class="btn-request btn-large">Request Walk</button>
+                            <a href='/available' class="btn-available btn-large">Available to Walk</a>
                         </div>
                     </div>
                     <nav class="navbar navbar-light background-color: white">
@@ -43,26 +52,89 @@
                     <h5>PROFILE</h5>
                 </div>
                 <div class='userimage'>
-                    <div class="img">
-                        <img src="/buddy_app/buddy/static/img/kisspng-computer-icons-user-male-user-5abf1fb126c985.3699867815224749291589.png"
-                            alt="profile pic">
-                    </div>
+                    <img class="profile_pic" src="{{ url_for('static', filename='img/profile_placeholder.jpg') }}"
+                        alt="profile_pic">
                     <h3>{{ first_name[0]['first_name'] }} {{ last_name[0]['last_name'] }}</h3>
                     <h5>Location</h5>
                     <p>{{ about[0]['about'] }}</p>
-                    <a href='#' class="btn btn-outline-primary" value="message">Devon</a>
-                    <a href='#' class="btn btn-outline-secondary" value="message">Shawn</a>
-                    <a href='#' class="btn btn-outline-warning" value="message">Kaysee</a>
-                    <a href='#' class="btn btn-outline-success" value="message">Cam</a>
+                    <div class="walkers">
+                        <a href='/location' class="btn btn-outline-primary btn-hide" value="message">Devon</a>
+                        <a href='/location' class="btn btn-outline-secondary btn-hide" value="message">Shawn</a>
+                        <a href='/location' class="btn btn-outline-warning btn-hide" value="message">Kaysee</a>
+                        <a href='/location' class="btn btn-outline-success btn-hide" value="message">Cam</a>
+                    </div>
                 </div>
+
+                <!-- This is a test for the hide/show feature in j query -->
+
+                <script>
+                    $(document).ready(function () {
+                        $('.walkers').hide()
+                        $('.negative_red').hide()
+                        $('.btn-request').click(function () {
+                            $('.walkers').show()
+                        });
+
+                        $("#hider").click(function () {
+                            $("span:last-child").hide("fast", function () {
+                                // Use arguments.callee so we don't need a named function
+                                $(this).prev().hide("fast", arguments.callee);
+                            });
+                        });
+                        $("#shower").click(function () {
+                            $("span").show(2000);
+                        });
+                        $('.review_logo').click(function () {
+                            $("img").show();
+                            console.log("button clicked");
+                        })
+                        $(".negative").click(function () {
+                            document.getElementById('review_section').innerHTML =
+                                "Uh no! You're reporting that you've had a negative experience with your buddy.";
+                            $(this).attr('src', $(this).attr('data-alt-src'));
+                        })
+                        $(".neutral").click(function () {
+                            document.getElementById('review_section').innerHTML =
+                                "Nothing to write home about. Neither a negative or positive experience with my buddy.";
+                            $(this).attr('src', $(this).attr('data-alt-src'));
+                        })
+                        $(".positive").click(function () {
+                            document.getElementById('review_section').innerHTML =
+                                "Hey you rated your buddy a 10! Tell us more...";
+                            $(this).attr('src', $(this).attr('data-alt-src'));
+                        })
+
+                    })
+                </script>
+                {% with messages = get_flashed_messages(category_filter=['review']) %}
+                {% if messages %}
+                {% for message in messages %}
+                <p class="text-danger">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <div class='lasttripinfo'>
-                    <h4>Your Last Buddy Trip</h4>
-                    <h5>1 HR Ago</h5>
-                    <h6>Sing long her way size. Waited end mutual missed myself the little sister one. So in pointed or
-                        chicken cheered neither spirits invited.</h6>
+                    <h4>Rate Your Last Buddy Trip</h4>
+                    <h5>1 HR Ago (Jinja for created at)</h5>
+                    <p>Please choose which smiley represents your experience best and leave a review on your latest trip
+                        with your buddy:</p>
+                    <form action='/review' method='POST'>
+                        <div class='review'>
+                            <textarea id="review_section" name="message">
+                        Tell us how it went...
+                        </textarea>
+                        </div>
                 </div>
-                <div class='lasttripinfo-gradient'>
+                <div class='lasttripinfo-gradient switch'>
+                    <img class="review_logo negative switch" src="{{ url_for('static', filename='img/negative.jpeg') }}"
+                        data-alt-src="{{ url_for('static', filename='img/negative_red.jpeg') }}" alt="sad_face">
+                    <img class="review_logo neutral switch" src="{{ url_for('static', filename='img/neutral.jpeg') }}"
+                        data-alt-src="{{ url_for('static', filename='img/neutral_yellow.jpeg') }}" alt="neutral_face">
+                    <img class="review_logo positive switch" src="{{ url_for('static', filename='img/positive.jpeg') }}"
+                        data-alt-src="{{ url_for('static', filename='img/positive_green.jpeg') }}" alt="happy_face">
                 </div>
+                <input type=submit class="btn btn-warning" value="Submit">
+                </form>
             </div>
         </div>
 
