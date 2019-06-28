@@ -26,6 +26,15 @@
     <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
 
     <!-- This is a test for the hide/show feature in jquery -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/ajax.js') }}"></script>
+    <style>
+        span {
+            background: #def3ca;
+            padding: 3px;
+            float: left;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
             $(document).ready(function () {
