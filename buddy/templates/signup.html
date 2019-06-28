@@ -12,6 +12,13 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Local CSS -->
     <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- jQuery -->
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/ajax.js') }}"></script>
+
 
 
 </head>
@@ -29,7 +36,7 @@
                 <img src='/static/img/arrow.png' class="arrow-img" alt='arrow'>
                 <h4>SIGN UP</h4>
             </div>
-            <form action='/signupprocess' method='POST' class="signupform">
+            <form action='/signupprocess' method='POST' id="regForm" class="signupform">
 
                 {% with messages = get_flashed_messages(category_filter=['first_name']) %}
                 {% if messages %}
@@ -92,9 +99,11 @@
                 {% endif %}
                 {% endwith %}
 
+                <p id="emailMsg"></p>
+
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="">
                 </div>
 
                 {% with messages = get_flashed_messages(category_filter=['telephone']) %}
@@ -143,9 +152,9 @@
 
 
     <!-- Required scripts for Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+    </script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>

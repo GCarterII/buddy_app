@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, redirect, session, flash, jsonify
 from flask_bcrypt import Bcrypt
 
 from mysql_db import connectToMySQL
@@ -119,6 +119,19 @@ def member():
 def signin_process():
     return render_template('signup.html')
 
+@app.route('/email', methods=['POST'])
+def email():
+    print("In email ajax post route.."*80)
+    found = False
+    mysql = connectToMySQL('buddy')
+    query = "SELECT email from users WHERE users.email = %(email)s;"
+    data = { 'email': request.form['email'] }
+    result = mysql.query_db(query, data)
+    print('ajax process working')
+    if result:
+        found = True
+    return render_template("email.html", found = found)
+
 
 @app.route('/welcome')
 def buddy_Welcome():
@@ -191,7 +204,7 @@ def location():
         return redirect('/')
     return render_template('location.html')
 
-
+ 
 
 if __name__ == "__main__":
     app.run(debug=True)
