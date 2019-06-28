@@ -5,16 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Location</title>
-    <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- Google Signin Client ID credentials -->
+    <meta name="google-signin-client_id"
+        content="81314975924-5sg6s42i7nhk0fe3gbdtk4uhgve2b6mh.apps.googleusercontent.com">
+    <!-- Materialize CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Import Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Files I took from my Login & Regis since the jinja wasn't working -->
+    <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+    <!-- -- Local CSS -->
+    <link rel="stylesheet" ref="text/css" href="{{url_for('static', filename='css/style.css')}}">
+
     <style>
         .container-fluid {
             margin: 0px auto;
@@ -23,7 +33,7 @@
             height: 812pt;
         }
 
-        .map {
+        #map {
             height: 450pt;
             background-color: green;
         }
@@ -52,6 +62,8 @@
     </style>
 </head>
 
+    <title>Location</title>
+    
 <body>
     <div class="container-fluid">
         <div class='row'>
@@ -72,17 +84,21 @@
                         <a href='/' class='btn btn-outline-danger col-3' value="log out">log out</a>
                     </nav>
                 </div>
-                <div class="map">
-                    <p>(Google Maps API here)</p>
-                    <h2>LOCATION</h2>
+                <div id="map">
+                    <!-- <p>(Google Maps API here)</p>
+                    <h2>LOCATION</h2> -->
 
                 </div>
                 <div class="directions">
                     <ul>
-                        <li>555 Starting Location Drive, CA 55555</li>
-                        <li></li>
-                        <li></li>
-                        <li>To 123 Final Destination Lane, CA 55555</li>
+                        <input type="textbox" id="from" placeholder="From">
+                        <input type="submit" type="button" id="fromBtn" value="Choose from">
+                        <input type="submit" type="button" id="currentLoc" value="Use current location">
+                        <input type="textbox" id="to" placeholder="To">
+                        <input type="submit" type="button" id="toBtn" value="Choose to">
+                        <input type="submit" type="button" id="getDir" disabled="true" value="Get directions and request Buddy!">
+                        <p id="fromLoc" hidden="true">From: </p>
+                        <p id="toLoc" hidden="true">To: </p>
                     </ul>
                     <img src='/' alt="gold_arrow">
                     <div class="dropdown">
@@ -107,19 +123,186 @@
 
 
 
+    
+    <script>
+            // Initialize and add the map
+            function initMap() {
+            // The location of Uluru
+                var uluru = {lat: -25.344, lng: 131.036};
+                var map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 14, center: uluru});
+                // The map, centered at Uluru
+                var geocoder = new google.maps.Geocoder();
+                var directionsService = new google.maps.DirectionsService();
+                var directionsDisplay = new google.maps.DirectionsRenderer();
+                directionsDisplay.setMap(map);
+                var toMarker = 0;
+                var fromMarker = 0;
+                document.getElementById('toBtn').addEventListener('click', function() {
+                    geocodeAddressTo(geocoder, map);
+                    if (typeof toMarker == 'object' && typeof fromMarker == 'object'){
+                        document.getElementById('getDir').disabled = false;
+                    }
+                });
+                document.getElementById('fromBtn').addEventListener('click', function() {
+                    geocodeAddressFrom(geocoder, map);
+                    if (typeof toMarker == 'object' && typeof fromMarker == 'object'){
+                        document.getElementById('getDir').disabled = false;
+                    }
+                });
+                document.getElementById('currentLoc').addEventListener('click', function() {
+                    geoloc();
+                });
+                document.getElementById('getDir').addEventListener('click', function() {
+                    calcRoute();
+                    document.getElementById('toBtn').hidden = true;
+                    document.getElementById('fromBtn').hidden = true;
+                    document.getElementById('to').hidden = true;
+                    document.getElementById('from').hidden = true;
+                    document.getElementById('currentLoc').hidden = true;
+                    document.getElementById('fromLoc').hidden = false;
+                    if (document.getElementById('from').value == "") {
+    
+                    document.getElementById('fromLoc').innerHTML += "Current Location";
+                    } else {
+    
+                    document.getElementById('fromLoc').innerHTML += document.getElementById('from').value;
+                    }
+    
+                    document.getElementById('toLoc').hidden = false;
+                    document.getElementById('toLoc').innerHTML += document.getElementById('to').value;
+                });
+                function calcRoute() {
+                    // var start = document.getElementById('start').value;
+                    // var end = document.getElementById('end').value;
+                    var request = {
+                        origin: {lat: fromMarker.position.lat(), lng: fromMarker.position.lng()},
+                        destination: {lat: toMarker.position.lat(), lng: toMarker.position.lng()},
+                        travelMode: 'WALKING'
+                    };
+                    directionsService.route(request, function(result, status) {
+                        if (status == 'OK') {
+                        directionsDisplay.setDirections(result);
+                        }
+                    });
+    
+                }
+                function geoloc(){
+                    if (navigator.geolocation){
+                        navigator.geolocation.getCurrentPosition(function(position){
+                            var pos= {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            map.setCenter(pos);
+                            if (typeof fromMarker == 'object'){
+                                console.log('true');
+                                fromMarker.setPosition({lat: pos.lat, lng: pos.lng, alt:0});
+                                // toMarker.map = resultsMap
+                            } else {
+                                console.log("false")
+                                fromMarker = new google.maps.Marker({
+                                map: map,
+                                label: "from",
+                                position: {lat: pos.lat, lng: pos.lng, alt:0}
+                            })
+                        }
+                        }, function() {
+                            alert("Unfortunately your device failed to give its location");
+                        });
+                    } else {
+                        alert("Unfortunately your device failed to give its location");
+                    }
+                }
+                function geocodeAddressTo(geocoder, resultsMap) {
+                    var address = document.getElementById('to').value;
+                        geocoder.geocode({'address': address}, function(results, status) {
+                            if (status === 'OK') {
+                                resultsMap.setCenter(results[0].geometry.location);
+                                console.log(typeof toMarker)
+                                if (typeof toMarker == 'object'){
+                                    console.log('true');
+                                    toMarker.setPosition(results[0].geometry.location);
+                                    // toMarker.map = resultsMap
+                                }
+                                else
+                                    toMarker = new google.maps.Marker({
+                                    map: resultsMap,
+                                    label: "to",
+                                    position: results[0].geometry.location
+                                });
+                                
+                                console.log(toMarker.position.lat())
+                                
+                            } else {
+                                alert("We couldn't get your location for the following reason: " + status);
+                            }
+                        });
+                }
+                function geocodeAddressFrom(geocoder, resultsMap) {
+                    var address = document.getElementById('from').value;
+                        geocoder.geocode({'address': address}, function(results, status) {
+                            if (status === 'OK') {
+                                resultsMap.setCenter(results[0].geometry.location);
+                                console.log(typeof fromMarker)
+                                if (typeof fromMarker == 'object'){
+                                    console.log('true');
+                                    fromMarker.setPosition(results[0].geometry.location);
+                                    // toMarker.map = resultsMap
+                                }
+                                else
+                                    fromMarker = new google.maps.Marker({
+                                    map: resultsMap,
+                                    label: "from",
+                                    position: results[0].geometry.location
+                                });
+                                
+                                console.log(fromMarker.position)
+                                
+    
+                            } else {
+                                alert("We couldn't get your location for the following reason: " + status);
+                            }
+                        });
+                }
+                // function geocodeLatLng(geocoder, map, infowindow) {
+                //     var input = document.getElementById('latlng').value;
+                //     var latlngStr = input.split(',', 2);
+                //     var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+                //     geocoder.geocode({'location': latlng}, function(results, status) {
+                //         if (status === 'OK') {
+                //             if (results[0]) {
+                //                 map.setZoom(11);
+                //                 var marker = new google.maps.Marker({
+                //                 position: latlng,
+                //                 map: map
+                //                 });
+                //                 infowindow.setContent(results[0].formatted_address);
+                //                 infowindow.open(map, marker);
+                //             } else {
+                //                 window.alert('No results found');
+                //             }
+                //         } else {
+                //         window.alert('Geocoder failed due to: ' + status);
+                //         }
+                //     });
+                // }
+            }
+         </script>
+    
+    <script src="http://maps.google.com/maps/api/js?key={{KEY GOES HERE}}&callback=initMap"></script>
+    
 
 
-
-
-    <!-- Required scripts for Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+<!-- Required scripts for Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
     <!-- Sidenav Scrip -->
     <script src="assets/sidenav.js"></script>
