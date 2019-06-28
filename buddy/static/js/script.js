@@ -1,42 +1,128 @@
 
 // Facebook oAuth
-var finished_rendering = function() {
-    console.log("finished rendering plugins");
-    var spinner = document.getElementById("spinner");
-    spinner.removeAttribute("style");
-    spinner.removeChild(spinner.childNodes[0]);
-  }
-  FB.Event.subscribe('xfbml.render', finished_rendering);
+// var finished_rendering = function() {
+//     console.log("finished rendering plugins");
+//     var spinner = document.getElementById("spinner");
+//     spinner.removeAttribute("style");
+//     spinner.removeChild(spinner.childNodes[0]);
+//   }
+//   FB.Event.subscribe('xfbml.render', finished_rendering);
 
-  window.fbAsyncInit = function () {
-    FB.init({
-        appId: '2424876137602826',
-        autoLogAppEvents: true,
-        xfbml: true,
-        status: true,
-        version: 'v3.3'
-    });
-    FB.Event.subscribe('auth.login', function () {
-        window.location = '/welcome';
-    });
-};
-FB.Event.subscribe('auth.logout', function () {
-    window.location.href = '/';
-});
+//   window.fbAsyncInit = function () {
+//     FB.init({
+//         appId: '2424876137602826',
+//         autoLogAppEvents: true,
+//         xfbml: true,
+//         status: true,
+//         version: 'v3.3'
+//     });
+//     // FB.Event.subscribe('auth.login', function () {
+//     //     window.location = '/welcome';
+//     // });
+// };
+// FB.Event.subscribe('auth.logout', function () {
+//     window.location.href = '/';
+// });
+// FB.login(function(response) {
+//     if (response.authResponse) {
+//      console.log('Welcome!  Fetching your information.... ');
+//      FB.api('/welcome', function(response) {
+//        console.log('Good to see you, ' + response.name + '.');
+//      });
+//     } else {
+//      console.log('User cancelled login or did not fully authorize.');
+//     }
+// });
 
 // Google OAuth
 
-  function onSignIn(googleUser) {
-    // Useful data for your client-side scripts:
+function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
 
-    // The ID token you need to pass to your backend:
-    var id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-}
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+  from authy.api import AuthyApiClient
+from flask import current_app
+from authy import AuthyApiException
+
+
+def get_authy_client():
+    """ Return a configured Authy client. """
+    return AuthyApiClient(current_app.config['AUTHY_API_KEY'])
+
+
+def create_user(form):
+    """Creates an Authy user and then creates a database User"""
+    client = get_authy_client()
+
+    # Create a new Authy user with the data from our form
+    authy_user = client.users.create(form.email.data,
+                                     form.phone_number.data,
+                                     form.country_code.data)
+
+    # If the Authy user was created successfully, create a local User
+    # with the same information + the Authy user's id
+    if authy_user.ok():
+        return form.create_user(authy_user.id)
+    else:
+        raise AuthyApiException('', '', authy_user.errors()['message'])
+
+
+def send_authy_token_request(authy_user_id):
+    """
+    Sends a request to Authy to send a SMS verification code to a user's phone
+    """
+    client = get_authy_client()
+
+    client.users.request_sms(authy_user_id)
+
+
+def send_authy_one_touch_request(authy_user_id, email=None):
+    """Initiates an Authy OneTouch request for a user"""
+    client = get_authy_client()
+
+    details = {}
+
+    if email:
+        details['Email'] = email
+
+    response = client.one_touch.send_request(
+        authy_user_id,
+        'Request to log in to Twilio demo app',
+        details=details
+    )
+
+    if response.ok():
+        return response.content
+
+
+def verify_authy_token(authy_user_id, user_entered_code):
+    """Verifies a user-entered token with Authy"""
+    client = get_authy_client()
+
+    return client.tokens.verify(
+        authy_user_id,
+        user_entered_code
+    )
+
+
+def authy_user_has_app(authy_user_id):
+    """Verifies a user has the Authy app installed"""
+    client = get_authy_client()
+    authy_user = client.users.status(authy_user_id)
+    try:
+        return authy_user.content['status']['registered']
+    except KeyError:
+        return False
+    );
+

@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, redirect, session, flash, url_for
 from flask_bcrypt import Bcrypt
 
 from mysql_db import connectToMySQL
 import re
+import os
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -10,10 +11,10 @@ app.secret_key = "keep it secret"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 
+# ---------------------------------------------------
 @app.route('/')
 def root():
     return render_template('index.html')
-
 
 # route to process new registration
 @app.route('/signupprocess', methods=['POST'])
@@ -128,19 +129,11 @@ def buddy_Welcome():
         return redirect('/')
 
     userid = session['userid']
-    mysql = connectToMySQL('buddy')
-    query = "SELECT first_name FROM users WHERE id=" +str(userid)
-    first_name = mysql.query_db(query)
 
     mysql = connectToMySQL('buddy')
-    query = "SELECT last_name FROM users WHERE id=" +str(userid)
-    last_name = mysql.query_db(query)
-
-    mysql = connectToMySQL('buddy')
-    query = "SELECT about FROM users WHERE id=" +str(userid)
-    about = mysql.query_db(query)
-
-    return render_template('userprofile.html', first_name=first_name, last_name=last_name, about=about)
+    user_query = "SELECT * FROM users WHERE id=" +str(userid)
+    users = mysql.query_db(user_query)
+    return render_template('userprofile.html', users=users)
 
 
 @app.route('/available')

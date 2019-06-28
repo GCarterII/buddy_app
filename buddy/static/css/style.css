@@ -1,61 +1,28 @@
-/* Custom Stylesheet */
+/* styles used on all pages */
 
 .container-fluid{
   margin: 0px auto;
   outline: 1px dotted red;
-  width: 375pt;
+  width: 300pt;
   display: grid;
   columns: 19px;
   offset: 52px;
 }
-/* ------INDEX/SPLASH page --------  */
-img{
-  display: flex;
-  width: 100%;
-  height: auto;
-}
-.login-form{
-  margin-top: 20pt;
+.container-fluid {
+  margin: 0px auto;
+  outline: 1px dotted red;
   width: 300pt;
-  margin-left: 30pt;
-  margin-bottom: 25pt;
+  display: grid;
+  columns: 19px;
+  offset: 52px;
 }
-.login-button{
-  margin-top: 20pt;
-  margin-bottom: 10pt;
-}
-.g-signin2{
-  width: 200pt;
-  margin-top: 20pt;
-  margin-bottom: -48pt;
-}
-.fbauth{
-  width: 200pt;
-  margin-top: 20pt;
-  margin-bottom: 20pt;
-  margin-left: 110pt;
-}
-.signup-button{
-  margin-top: 10pt;
-} 
 .row{
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-  margin-top: 30px;
-}
-
-/* ----SIGN UP --------- */
-
-.mastercontainer{
-  width: 375pt;
-}
-.row-wrap{
-  width: 300pt;
-  height: 20pt;
-}
-.header{
+  margin-left: -10pt;
+  margin-top: 10pt;
+ } 
+ /* .header{
   width: 350pt;
   height: 28pt;
   font-family: 14pt;
@@ -64,25 +31,81 @@ img{
   color: #008080;
   display: inline-block;
 }
-/* .row img{
-  float: left;
-  width: 15pt;
-  display: inline-block;
-  margin-left: 30pt;
-  margin-top: 8pt;
-} */
 .header h4{
   display: inline-block;
   margin-left: -20pt;
   text-align: center;
   vertical-align: middle;
   margin-top: 4pt;
+} */
+.bg-dark {
+  background-color: #343a40!important;
+  width: 280pt;
+  margin-left: -12pt;
 }
-.mastercontainer input{
-  width: 80pt;
+.btn-request, .btn-available{
+  width: 100pt;
+  margin-left: 10pt;
+  font-size: 6.5pt;
+  font-weight: bold;
+}
+.btn-request{
+  background-color: yellow;
+  color: black;
+  margin-right: 15pt;
+}
+.btn-available{
+  background-color: green;
+}
+.navbar-light{
+  width: 280pt;
+  margin-left: -12pt;
+}
+/* ------INDEX/SPLASH page --------  */
+.img-fluid {
+  max-width: 105%;
+  margin-left: -20pt;
+}
+.login-form{
+  margin-top: 20pt;
+  width: 250pt;
+  margin-bottom: 25pt;
+  display: inline-block;
+  margin-left: 5pt;
+}
+.login-button{
+  margin-top: 20pt;
+  margin-bottom: 10pt;
+  margin-left: 30pt;
+  display: inline-block;
+}
+.g-signin2{
+  width: 200pt;
+  margin-left: 80pt;
+  margin-top: 20pt;
+  margin-bottom: -48pt;
+}
+.fbauth{
+  width: 60pt;
+  margin-top: 60pt;
+  margin-bottom: 20pt;
+  margin-left: 40pt;
+  display: inline-block;
+}
+.signup-button{
+  margin-top: 10pt;
+  display: inline-block;
+  margin-left: 30pt;
+} 
+
+/* ----SIGN UP --------- */
+
+.btn {
+  margin-top: -30pt;
+  margin-left: 105pt;
 }
 .signupform{
-  width: 300pt;
+  width: 210pt;
   margin-left: 35pt;
   margin-top: 20pt;
 }
@@ -91,11 +114,11 @@ img{
 }
 .signup-header-row h4{
   text-align: center;
-  margin-left: 125pt;
+  margin-left: 55pt;
 }
-
 .arrow-img{
-  width: 30pt;
+  width: 20pt;
+  margin-left: 25pt;
   display: inline-block;
 }
 .col-sm-12 h4{
@@ -103,8 +126,13 @@ img{
   color: #009A9A;
   display: inline-block;
 }
+.signup-btn{
+  margin-top: 20pt;
+  margin-left: 75pt;
+}
 
 /* ---- USER PROFILE --------- */
+
 .col-sm-12 h4{
   text-align: center;
   color: #009A9A;
@@ -125,6 +153,9 @@ img{
   background-color: rosybrown;
   margin-left: 15pt;
 }
+.profile-callout{
+  margin-left: -35pt;
+}
 .negative h6{
   color: red;
 }
@@ -134,91 +165,109 @@ img{
 .positive h6{
   color: green;
 }
+.btn-hide{
+  margin-left: 16pt;
+}
+.switch{
+  width: 100%;
+}
 /* ---- LOCATION --------- */
-
+span {
+  background: #def3ca;
+  padding: 3px;
+  float: left;
+}
 .lasttripinfo{
   margin-top: 15pt;
-  margin-left: 25pt;
-  width: 345pt;
+  width: 300pt;
   height: 200pt;
   position: relative;
   background-color:rgba(0, 154, 154, 0.45);
-}
-.lasttripinfo-gradient{
-  width: 345pt;
-  height: 100pt;
-  margin-left: 25pt;
-  font-family: helvetica;
-  font-weight: lighter;
-  background-color: rgba(0, 154, 154, 0.29);
+  margin-bottom: 15pt;
 }
 .lasttripinfo h4{
-  color: white;
+  color: black;
   margin-bottom: .5rem;
   font-weight: 500;
   line-height: 6;
   margin-left: 25pt;
+  margin-top: -20pt;
 }
 .lasttripinfo h5{
   color: white;
   margin-bottom: .5rem;
   font-weight: 500;
   margin-left: 25pt;
+  margin-top: -20pt;
+  margin-bottom: 15pt;
   width: 250pt;
 }
 .lasttripinfo h6{
   color: white;
   margin-bottom: .5rem;
   font-weight: 500;
-  margin-left: 25pt;
+  margin-left: 35pt;
   width: 250pt;
 }
-
+.lasttripinfo p{
+  font-size: 8pt;
+  margin-left: 25pt;
+  margin-right: 25pt;
+}
 /* ---- USER PROFILE --------- */
 .col-sm-12 h5{
   text-align: center;
   margin-top: 5pt;
   color: #009A9A;
 }
-.btn-request{
-  background-color: yellow;
-  color: black;
-  margin-right: 25pt;
-  
-}
-.btn-available{
-  background-color: green;
-  
-}
+
 .userimage{
   text-align: center;
 }
 .userimage h3{
   margin-top: 5pt;
   color: #009A9A;
+  margin-left: -70pt;
 }
 .userimage h5{
   color: #009A9A;
+  margin-left: -65pt;
 }
 .profile_pic{
-  max-height: 70pt;
-  width: auto;
-  background-color: #009A9A;
+  width: 125pt;
+  height: auto;
   border: 2pt solid black;
   text-align: center;
   margin-top: 5pt;
-  margin-left: 45%;
-} */
+  margin-left: -70pt;
+} 
 .userimage p{
   margin-top: 20pt;
   text-align: center;
   color: #009A9A;
+  margin-left: 15pt;
+  margin-right: 80pt;
+}
+.review{
+  width: 250pt;
+  margin-left: 25pt;
+  margin-top: -20pt;
 }
 .review_logo{
-  height: 100pt;
+  height: 80pt;
   width: auto;
   display: inline-block;
-  margin-left: 17pt;
+  margin-left: 18.5pt;
+}
+.review_section{
+  font-size: 20pt;
+}
+.logout-button{
+  margin-top: 1.5pt;
+}
+.review-btn{
+  margin-top: 20pt;
+  margin-left: 120pt;
 }
 /* ---- Request Page --------- */
 .img col-6{
@@ -227,4 +276,115 @@ img{
   background-color: blue;
   border: 2px solid black;
 }
+.map {
+  height: 450pt;
+  background-color: green;
+}
+.map h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  padding-top: 50pt;
+}
 
+.directions {
+  height: 200pt;
+  width: 100%;
+  padding-top: 20pt;
+  color: #9A9A00;
+}
+
+.dropdown-toggle {
+  margin-top: 40pt;
+  margin-left: 60pt;
+}
+
+.btn-next {
+  margin-left: 250pt;
+}
+
+/* Accepted Page */
+
+.jumbotron {
+  background-color: #BCE0FD;
+  width: 285pt;
+  height: 150pt;
+  margin-left: -12pt;
+}
+.jumbotron img {
+  width: 305pt;
+  height: auto;
+  margin-left:-20pt;
+  margin-top: -25pt;
+  /* margin-bottom: 30pt;
+  position: relative; */ 
+}
+.banner {
+  background-color: #F1F9FF;
+  height: 110pt;
+  padding-left: 10pt;
+  margin-left: -30pt;
+}
+
+.banner h5 {
+  color: #2699FB
+}
+
+.banner p {
+  color: #2699FB;
+  margin-right: -30pt;
+}
+.message-btn{
+  margin-top: 5pt;
+}
+
+.box1 {
+  height: 80pt;
+  background-color: #F1F9FF;
+  text-align: left;
+  padding: 15pt;
+  position: relative;
+  display: inline-block;
+}
+
+.box2 {
+  height: 80pt;
+  max-width: 45%;
+  background-color: #F1F9FF;
+  position: absolute;
+  text-align: center;
+  display: inline-block;
+}
+.maincontent {
+  padding: 15pt;
+  margin-left: -20pt;
+}
+
+.map {
+  height: 300pt;
+  width: 300pt;
+  background-color: green;
+  margin-left: 5pt;
+}
+
+.directions {
+  height: 100pt;
+  width: 265pt;
+  background-color: #2699FB;
+  margin-left: 25pt;
+  padding-top: 15pt;
+  padding-left: 15pt;
+}
+
+.directions p {
+  color: white;
+  margin: 2pt;
+  position: relative;
+}
+
+.directions img {
+  position: absolute;
+}
+
+.btn-next {
+  margin-left: 240pt;
+}
